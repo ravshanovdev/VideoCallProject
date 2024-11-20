@@ -17,10 +17,12 @@ def register(request):
             form.save()
             return render(request, 'login.html', {'success': 'you successfully signup.! Please Login.! '})
         else:
-            error_message = form.error_messages.text()
+            error_message = form.errors
             return render(request, 'register.html', {'error': error_message})
 
-    return render(request, 'register.html', {})
+    else:
+        form = RegisterForm()
+        return render(request, 'register.html', {"form": form})
 
 
 def login_view(request):
